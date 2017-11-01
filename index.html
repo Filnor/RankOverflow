@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="A Stack Overflow rank calculator">
+	<meta name="author" content="pbdevch">
+	<link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="icon.png">
+	<meta name="theme-color" content="#343a40">
+
+	<title>Rank Overflow</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link href="css/scrolling-nav.min.css" rel="stylesheet">
+	<link href="css/rankoverflow.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+		<div class="container">
+		<a class="navbar-brand js-scroll-trigger" href="#page-top">RankOverflow</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+	  		<span class="navbar-toggler-icon"></span>
+		</button>
+	  </div>
+	</nav>
+
+	<header class="bg-primary text-white">
+		<div class="container text-center">
+			<h1>Welcome to RankOverflow</h1>
+			<p class="lead">Calculate your Stack Overflow Rank</p>
+		</div>
+	</header>
+
+	<section id="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 mx-auto">
+					<h2>Calculate Rank</h2>
+					<p class="lead">Just enter the link to your Stack Overflow profile page or your user id and let it calculate!</p>
+					<div class="card text-white bg-primary mb-3">
+						<div class="card-body">
+							<h4 class="card-title">Important notice</h4>
+							<p class="card-text">You need to have at least 200 reputation in order for this page to work.</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-form-label" for="id">Link to your Stack Overflow Profile:<span style="color: #dc3545;">*</span></label>
+						<input type="text" class="form-control" id="id" placeholder="https://stackoverflow.com/users/1/john-doe">
+						<div class="invalid-feedback" id="idError">Enter a valid Stack Overflow user profile URL!</div>
+					</div>
+
+					<button class="btn btn-primary float-right" type="button" onclick="calculateRank();">Calculate Rank!</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="services" class="bg-light">
+	  <div class="container">
+		<div class="row">
+		  <div class="col-lg-8 mx-auto">
+			<h2>Rank results</h2>
+			<p class="lead" id="rank-status">Please enter your ID and press "Calculate Rank" to see the results here.</p>
+			  <div class="loader hidden" id="rank-stats"></div>
+		  </div>
+		</div>
+	  </div>
+	</section>
+
+	<section id="contact">
+	  <div class="container">
+		<div class="row">
+		  <div class="col-lg-8 mx-auto">
+			<h2>Information</h2>
+			<p class="lead">Browser Support: All up-to-date browsers (No Internet Explorer (Mobile), Opera Mini, Blackberry Browser and UC Browser)</p>
+		  </div>
+		</div>
+	  </div>
+	</section>
+	<div id="rank-results"></div>
+
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+	  <div class="container">
+		<p class="m-0 text-center text-white">Copyright &copy; PHILNet.ch 2017</p>
+	  </div>
+	  <!-- /.container -->
+	</footer>
+
+	<!-- JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="js/rankoverflow.min.js"></script>
+	<!-- Supress errors from embedded JS -->
+	<script>$.fn.typeWatch = function () {}; StackExchange ={ init: function (obj) {}, topbar: {init: function(){}}};</script>
+</body>
+
+</html>
