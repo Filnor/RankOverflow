@@ -26,7 +26,8 @@ function calculateRank() {
     $("#rank-status").html("Your ranks are getting calculated, please wait...");
 
     //Clear existing results and get ranks
-    $("#rank-stats").html();
+    $(".col-xs-12.card-margin").addClass("hidden");
+
     var promise = new Promise(getAllRanks(userId));
     promise.then(function () {
         //Empty promise success handler
@@ -83,9 +84,13 @@ function getRank(id, fetchMode) {
             $(".loader").addClass("hidden");
             $("#rank-status").html("These are your ranks:");
             var share = userRank / lastRank;
-            var percentage = share * 100;
-            $("#rank-stats").removeClass("hidden").removeClass("loader");
-            $("#rank-stats").html($("#rank-stats").html() + "<p>In league " + fetchMode + ": top " + Math.ceil(percentage) + "%</p>");
+            var percentageExact = share * 100;
+            var percentage = percentageExact > 1 ? Math.ceil(percentageExact) : Math.ceil(percentageExact * 100) / 100;
+            //$("#rank-stats").removeClass("hidden");
+
+            $(".rank-" + fetchMode).first().parent().parent().parent().removeClass("hidden");
+            $(".rank-" + fetchMode).html(percentage);
+            $(".rank-exact-" + fetchMode).html(percentageExact);
         }).catch(function(e){});
     }).catch(function(e){});
 }

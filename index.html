@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="A Stack Overflow rank calculator">
 	<meta name="author" content="pbdevch">
-	<link rel="apple-touch-icon" sizes="180x180" href="icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="icon.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon.ico">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon.ico">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
 	<meta name="theme-color" content="#343a40">
 
 	<title>Rank Overflow</title>
@@ -22,85 +22,142 @@
 
 <body id="page-top">
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-		<div class="container">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+	<div class="container">
 		<a class="navbar-brand js-scroll-trigger" href="#page-top">Rank Overflow</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-	  		<span class="navbar-toggler-icon"></span>
+			<span class="navbar-toggler-icon"></span>
 		</button>
-	  </div>
-	</nav>
+	</div>
+</nav>
 
-	<header class="bg-primary text-white">
-		<div class="container text-center">
-			<h1>Welcome to Rank Overflow</h1>
-			<p class="lead">Calculate your Stack Overflow Rank</p>
-		</div>
-	</header>
+<header class="bg-primary text-white">
+	<div class="container text-center">
+		<h1>Welcome to Rank Overflow</h1>
+		<p class="lead">See the StackApps Page</p>
+	</div>
+</header>
 
-	<section id="about">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 mx-auto">
-					<h2>Calculate Rank</h2>
-					<p class="lead">Just enter the link to your Stack Overflow profile page or your user id and let it calculate!</p>
-					<div class="card text-white bg-primary mb-3">
-						<div class="card-body">
-							<h4 class="card-title">Important notice</h4>
-							<p class="card-text">You need to have at least 200 reputation in order for this page to work.</p>
-						</div>
+<section id="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 mx-auto">
+				<h2>Calculate Rank</h2>
+				<p class="lead">Just enter the link to your Stack Overflow profile page or your user id and let it calculate!</p>
+				<div class="card text-white bg-primary mb-3">
+					<div class="card-body">
+						<h4 class="card-title">Important notice</h4>
+						<p class="card-text">You need to have at least 200 reputation in order for this page to work.</p>
 					</div>
-					<div class="form-group">
-						<label class="col-form-label" for="id">Link to your Stack Overflow Profile:<span style="color: #dc3545;">*</span></label>
-						<input type="text" class="form-control" id="id" placeholder="https://stackoverflow.com/users/1/john-doe">
-						<div class="invalid-feedback" id="idError">Enter a valid Stack Overflow user profile URL!</div>
-					</div>
-
-					<button class="btn btn-primary float-right" type="button" onclick="calculateRank();">Calculate Rank!</button>
 				</div>
+				<div class="form-group">
+					<label class="col-form-label" for="id">Link to your Stack Overflow Profile:<span style="color: #dc3545;">*</span></label>
+					<input type="text" class="form-control" id="id" placeholder="https://stackoverflow.com/users/1/john-doe">
+					<div class="invalid-feedback" id="idError">Enter a valid Stack Overflow user profile URL!</div>
+				</div>
+
+				<button class="btn btn-primary float-right" type="button" onclick="calculateRank();">Calculate Rank!</button>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
-	<section id="services" class="bg-light">
-	  <div class="container">
+<section id="services" class="bg-light">
+	<div class="container">
 		<div class="row">
-		  <div class="col-lg-8 mx-auto">
-			<h2>Rank results</h2>
-			<p class="lead" id="rank-status">Please enter your ID and press "Calculate Rank" to see the results here.</p>
-			  <div class="loader hidden" id="rank-stats"></div>
-		  </div>
+			<div class="col-lg-8 mx-auto">
+				<h2>Rank results</h2>
+				<p class="lead" id="rank-status">Please enter your ID and press "Calculate Rank" to see the results here.</p>
+				<div class="container" id="rank-summary">
+					<div class="col-xs-12 card-margin hidden">
+						<div class="card">
+							<div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-week"></span>%</div>
+							<div class="card-body">
+								<h4 class="card-title">Week</h4>
+								<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+								<p class="card-text">You are in the top <span class="rank-exact-week"></span>% this week.</p>
+								<p>Badge: <span class="badge badge-primary">top <span class="rank-week"></span>% this week</span></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 card-margin hidden">
+						<div class="card">
+							<div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-month"></span>%</div>
+							<div class="card-body">
+								<h4 class="card-title">Month</h4>
+								<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+								<p class="card-text">You are in the top <span class="rank-exact-month"></span>% this month.</p>
+								<p>Badge: <span class="badge badge-primary">top <span class="rank-month"></span>% this month</span></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 card-margin hidden">
+						<div class="card">
+							<div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-quarter"></span>%</div>
+							<div class="card-body">
+								<h4 class="card-title">Quarter</h4>
+								<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+								<p class="card-text">You are in the top <span class="rank-exact-quarter"></span>% this quarter.</p>
+								<p>Badge: <span class="badge badge-primary">top <span class="rank-quarter"></span>% this quarter</span></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 card-margin hidden">
+						<div class="card">
+							<div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-year"></span>%</div>
+							<div class="card-body">
+								<h4 class="card-title">Year</h4>
+								<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+								<p class="card-text">You are in the top <span class="rank-exact-year"></span>% this year.</p>
+								<p>Badge: <span class="badge badge-primary">top <span class="rank-year"></span>% this year</span></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 card-margin hidden">
+						<div class="card">
+							<div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-alltime"></span>%</div>
+							<div class="card-body">
+								<h4 class="card-title">All time</h4>
+								<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+								<p class="card-text">You are in the top <span class="rank-exact-alltime"></span>% of all time.</p>
+								<p>Badge: <span class="badge badge-primary">top <span class="rank-alltime"></span>% overall</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="loader hidden" id="rank-stats"></div>
+			</div>
 		</div>
-	  </div>
-	</section>
+	</div>
+</section>
 
-	<section id="contact">
-	  <div class="container">
+<section id="contact">
+	<div class="container">
 		<div class="row">
-		  <div class="col-lg-8 mx-auto">
-			<h2>Information</h2>
-			<p class="lead">Browser Support: All up-to-date browsers (No Internet Explorer (Mobile), Opera Mini, Blackberry Browser and UC Browser)</p>
-		  </div>
+			<div class="col-lg-8 mx-auto">
+				<h2>Information</h2>
+				<p class="lead">Please refer to the <a href="https://stackapps.com/search?q=Rank+Overflow">StackApps Question for Rank Overflow</a> for informations like browser support.</p>
+			</div>
 		</div>
-	  </div>
-	</section>
-	<div id="rank-results"></div>
+	</div>
+</section>
+<div id="rank-results"></div>
 
-	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-	  <div class="container">
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+	<div class="container">
 		<p class="m-0 text-center text-white">Copyright &copy; PHILNet.ch 2017</p>
-	  </div>
-	  <!-- /.container -->
-	</footer>
+	</div>
+	<!-- /.container -->
+</footer>
 
-	<!-- JavaScript -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-	<script src="js/rankoverflow.min.js"></script>
-	<!-- Supress errors from embedded JS -->
-	<script>$.fn.typeWatch = function () {}; StackExchange ={ init: function (obj) {}, topbar: {init: function(){}}};</script>
+<!-- JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="js/rankoverflow.min.js"></script>
+<!-- Supress errors from embedded JS -->
+<script>$.fn.typeWatch = function () {}; StackExchange ={ init: function (obj) {}, topbar: {init: function(){}}}; League = { beginLoadMissingUsers: function() {}} </script>
 </body>
 
 </html>
