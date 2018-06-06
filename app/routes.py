@@ -7,3 +7,7 @@ from app import app
 def index():
     current_year = date.today().year
     return render_template('index.html', current_year=current_year)
+
+@app.route('/blank')
+def blank():
+    return ""

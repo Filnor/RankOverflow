@@ -1,5 +1,7 @@
 # Rank Overflow
-Calculate all types of Stack Overflow reputation rank at once  
-### [https://philnet.ch/rankoverflow](https://philnet.ch/rankoverflow)
+Calculate all types of reputation rank at once
 
-[https://stackapps.com/questions/7661/rankoverflow-a-website-to-calculate-your-stack-overflow-reputation-rank-in-all/](https://stackapps.com/questions/7661/rankoverflow-a-website-to-calculate-your-stack-overflow-reputation-rank-in-all/)
+Visit the page:
+### [https://rankoverflow.philnet.ch](https://rankoverflow.philnet.ch)
+
+StackApps post: [https://stackapps.com/questions/7661/rankoverflow-a-website-to-calculate-your-stack-overflow-reputation-rank-in-all/](https://stackapps.com/questions/7661/rankoverflow-a-website-to-calculate-your-stack-overflow-reputation-rank-in-all/)

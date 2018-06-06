@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A Stack Overflow rank calculator">
-    <meta name="author" content="pbdevch">
+    <meta name="description" content="A Stack Exchange rank calculator">
+    <meta name="author" content="Filnor">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -35,7 +35,7 @@
 <header class="bg-primary text-white">
     <div class="container text-center">
         <h1>Welcome to Rank Overflow</h1>
-        <p class="lead">See the StackApps Page</p>
+        <p class="lead">Calculate all types of reputation rank at once</p>
     </div>
 </header>
 
@@ -43,21 +43,24 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h2>Calculate Rank</h2>
-                <p class="lead">Just enter the link to a Stack Overflow profile page and let it calculate!</p>
+                <h2>Authenticate yourself</h2>
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-body">
                         <h4 class="card-title">Important notice</h4>
-                        <p class="card-text">You need to have at least 200 reputation in order for this page to work.</p>
+                        <p class="card-text">You need to have at least 200 reputation on the site you want to check in order this site can work</p>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-form-label" for="id">Link to the Stack Overflow profile:<span style="color: #dc3545;">*</span></label>
-                    <input type="text" class="form-control" id="id" placeholder="https://stackoverflow.com/users/1/john-doe">
-                    <div class="invalid-feedback" id="idError">Enter a valid Stack Overflow user profile URL!</div>
-                </div>
 
-                <button class="btn btn-primary float-right" type="button" onclick="calculateRank();">Calculate Rank!</button>
+                <p>To get your user id, you need to authenticate yourself with Stack Exchange (if you have authenticated yourself here in the last 24 hours, you don't need to repeat that):</p>
+                <button class="btn btn-outline-primary" type="button" onclick="seAuth()"><img src="{{ url_for('static', filename='stackexchange.png') }}" alt="SE icon" height="16px" width="16px"> <span id="seAuthStatus">Authenticate with Stack Exchange</span></button>
+                <p class="small">With authenticating yourself you only give us read access to your public data. We won't be able to post in your name or see any private data.</p>
+
+                <p>Once you have authenticated yourself, select a site and click on this button to calculate your ranks:</p>
+                <label for="sites">Select a site:</label>
+                <select disabled id="sites">
+                    <!--<option selected disabled>Choose...</option>-->
+                </select>
+                <button class="btn btn-primary disabled" type="button" id="calculate" onclick="calculateRank();">Calculate Ranks!</button>
             </div>
         </div>
     </div>
@@ -68,7 +71,7 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2>Rank results</h2>
-                <p class="lead" id="rank-status">Please enter your ID and press "Calculate Rank" to see the results here.</p>
+                <p class="lead" id="rank-status">Please authenticate yourself and click "Calculate Rank" to see the results here.</p>
                 <div class="container" id="rank-summary">
                     <div class="col-xs-12 card-margin hidden">
                         <div class="card">
@@ -154,6 +157,7 @@
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script type='text/javascript' src='https://api.stackexchange.com/js/2.0/all.js'></script>
 <script src="{{ url_for('static', filename='rankoverflow.js') }}"></script>
 </body>
 
