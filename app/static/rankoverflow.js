@@ -9,7 +9,7 @@ var sites = [];
 SE.init({
     clientId: 11094,
     key: 'SpGwH7NcD6U2aS6Qmsomug((',
-    channelUrl: 'http://rankoverflow.philnet.ch/blank',
+    channelUrl: 'https://rankoverflow.philnet.ch/blank',
     complete: function (data) { console.log(data) }
 });
 
