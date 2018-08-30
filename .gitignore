@@ -109,6 +109,9 @@ ENV/
 # SQLite Databases
 *.db
 
+# CSV files
+*.csv
+
 # SQLAlchemy
 migrations/alembic.ini
 migrations/env.py

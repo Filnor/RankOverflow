@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A Stack Exchange rank calculator">
+    <meta name="description" content="Hall of fame for our flagging experts">
     <meta name="author" content="Filnor">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta name="theme-color" content="#343a40">
 
-    <title>Rank Overflow</title>
+    <title>SOBotics Flagger Scoreboard</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -29,18 +29,18 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!--<ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for("scoreboard") }}">SOBotics Flagger Scoreboard</a>
+                <a class="nav-link" href="/">Main site</a>
             </li>
-        </ul>-->
+        </ul>
     </div>
 </nav>
 
 <header class="bg-primary text-white">
     <div class="container text-center">
-        <h1>Welcome to Rank Overflow</h1>
-        <p class="lead">Calculate all types of reputation rank at once</p>
+        <h1>SOBotics Flagger Scoreboard</h1>
+        <p class="lead">Hall of fame for our flagging experts.</p>
     </div>
 </header>
 
@@ -48,34 +48,44 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h2>Authenticate yourself</h2>
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-body">
-                        <h4 class="card-title">Important notice</h4>
-                        <p class="card-text">You need to have at least 200 reputation on the site you want to check in order this site can work</p>
-                    </div>
-                </div>
+                <table class="table" id="scoreboard">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Flag count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--<tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>131.213</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>1.084</td>
+                    </tr>-->
+                    <tr>
+                        <td id="loader" colspan="3" class="text-center">Loading scoreboard... <div class="loader"></div></td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                <p>To get your user id, you need to authenticate yourself with Stack Exchange (if you have authenticated yourself here in the last 24 hours, you don't need to repeat that):</p>
-                <button class="btn btn-outline-primary" type="button" onclick="seAuth()"><img src="{{ url_for('static', filename='stackexchange.png') }}" alt="SE icon" height="16px" width="16px"> <span id="seAuthStatus">Authenticate with Stack Exchange</span></button>
-                <p class="small">With authenticating yourself you only give us read access to your public data. We won't be able to post in your name or see any private data.</p>
+                <button class="btn btn-primary" id="show-all" type="button" disabled>Show all</button>
 
-                <p>Once you have authenticated yourself, select a site and click on this button to calculate your ranks:</p>
-                <label for="sites">Select a site:</label>
-                <select disabled id="sites">
-                    <!--<option selected disabled>Choose...</option>-->
-                </select>
-                <button class="btn btn-primary disabled" type="button" id="calculate" onclick="calculateRank();">Calculate Ranks!</button>
+                <p class="small">Users with less than 500 flags are not shown</p>
             </div>
         </div>
     </div>
 </section>
 
-<section id="services" class="bg-light">
+<!--<section id="services" class="bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h2>Rank results</h2>
+                <h2>R</h2>
                 <p class="lead" id="rank-status">Please authenticate yourself and click "Calculate Rank" to see the results here.</p>
                 <div class="container" id="rank-summary">
                     <div class="col-xs-12 card-margin hidden">
@@ -83,7 +93,6 @@
                             <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-week"></span>%</div>
                             <div class="card-body">
                                 <h4 class="card-title">Week</h4>
-                                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                                 <p class="card-text">You are in the top <span class="rank-exact-week"></span>% this week.</p>
                                 <p>Badge: <span class="badge badge-primary">top <span class="rank-week"></span>% this week</span></p>
                             </div>
@@ -94,7 +103,6 @@
                             <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-month"></span>%</div>
                             <div class="card-body">
                                 <h4 class="card-title">Month</h4>
-                                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                                 <p class="card-text">You are in the top <span class="rank-exact-month"></span>% this month.</p>
                                 <p>Badge: <span class="badge badge-primary">top <span class="rank-month"></span>% this month</span></p>
                             </div>
@@ -105,7 +113,6 @@
                             <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-quarter"></span>%</div>
                             <div class="card-body">
                                 <h4 class="card-title">Quarter</h4>
-                                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                                 <p class="card-text">You are in the top <span class="rank-exact-quarter"></span>% this quarter.</p>
                                 <p>Badge: <span class="badge badge-primary">top <span class="rank-quarter"></span>% this quarter</span></p>
                             </div>
@@ -116,7 +123,6 @@
                             <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-year"></span>%</div>
                             <div class="card-body">
                                 <h4 class="card-title">Year</h4>
-                                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                                 <p class="card-text">You are in the top <span class="rank-exact-year"></span>% this year.</p>
                                 <p>Badge: <span class="badge badge-primary">top <span class="rank-year"></span>% this year</span></p>
                             </div>
@@ -127,7 +133,6 @@
                             <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-alltime"></span>%</div>
                             <div class="card-body">
                                 <h4 class="card-title">All time</h4>
-                                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
                                 <p class="card-text">You are in the top <span class="rank-exact-alltime"></span>% of all time.</p>
                                 <p>Badge: <span class="badge badge-primary">top <span class="rank-alltime"></span>% overall</span></p>
                             </div>
@@ -138,23 +143,13 @@
             </div>
         </div>
     </div>
-</section>
-
-<section id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h2>Information</h2>
-                <p class="lead">Please refer to the <a href="https://stackapps.com/questions/7661/rankoverflow-a-website-to-calculate-your-stack-overflow-reputation-rank-in-all/">StackApps Question for Rank Overflow</a> for informations like browser support.</p>
-            </div>
-        </div>
-    </div>
-</section>
+</section>-->
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">&copy; 2017 - {{ current_year }} Filnor</p>
+        <p class="m-0 text-center text-white">Made by and for the <a href="https://sobotics.org/">SOBotics</a> team. Content provided by the
+            <a href="https://api.stackexchange.com/">Stack Exchange API</a> under the <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 license</a>.</p>
     </div>
     <!-- /.container -->
 </footer>
@@ -162,8 +157,43 @@
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script type='text/javascript' src='https://api.stackexchange.com/js/2.0/all.js'></script>
-<script src="{{ url_for('static', filename='rankoverflow.min.js') }}"></script>
+<script>
+    const numberWithCommas = (x) => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
+    $(document).ready(function () {
+        fetch("/api/scoreboard", {
+            method: "POST",
+            body: JSON.stringify({fkey: "<REDACTED>"}),
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        }).then(function(resp) {
+            return resp.json();
+        }).then(function(scores) {
+            var scoreCounter = 1;
+            scores.forEach(function (score) {
+                var row = `
+            <tr class="${scoreCounter < 10 || 'hidden'}">
+                <td>${scoreCounter}</td>
+                <td>${score.username}</td>
+                <td>${numberWithCommas(score.flag_count)}</td>
+            </tr>
+            `;
+                $("#scoreboard").find("tbody").append(row);
+                scoreCounter++;
+            });
+
+            $("#loader").remove();
+            $("#show-all").removeAttr("disabled");
+        }).catch(function(e) {
+            console.error(e);
+        })
+    });
+
+    $("#show-all").on("click", function () {
+        $("tr").removeClass("hidden");
+    });
+</script>
 </body>
 
 </html>
