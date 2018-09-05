@@ -109,8 +109,8 @@ ENV/
 # SQLite Databases
 *.db
 
-# CSV files
-*.csv
+# config file
+config.py
 
 # SQLAlchemy
 migrations/alembic.ini
@@ -119,5 +119,7 @@ migrations/README
 migrations/script.py.mako
 
 /keyrings/live/pubring.gpg~
+/keyrings/live/pubring.kbx~
+/keyrings/live/secring.gpg/keyrings/live/pubring.gpg~
 /keyrings/live/pubring.kbx~
 /keyrings/live/secring.gpg
