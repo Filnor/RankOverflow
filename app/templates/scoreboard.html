@@ -15,7 +15,6 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link href="{{ url_for('static', filename='scrolling-nav.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='rankoverflow.css') }}" rel="stylesheet">
 
 </head>
@@ -81,82 +80,16 @@
     </div>
 </section>
 
-<!--<section id="services" class="bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h2>R</h2>
-                <p class="lead" id="rank-status">Please authenticate yourself and click "Calculate Rank" to see the results here.</p>
-                <div class="container" id="rank-summary">
-                    <div class="col-xs-12 card-margin hidden">
-                        <div class="card">
-                            <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-week"></span>%</div>
-                            <div class="card-body">
-                                <h4 class="card-title">Week</h4>
-                                <p class="card-text">You are in the top <span class="rank-exact-week"></span>% this week.</p>
-                                <p>Badge: <span class="badge badge-primary">top <span class="rank-week"></span>% this week</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 card-margin hidden">
-                        <div class="card">
-                            <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-month"></span>%</div>
-                            <div class="card-body">
-                                <h4 class="card-title">Month</h4>
-                                <p class="card-text">You are in the top <span class="rank-exact-month"></span>% this month.</p>
-                                <p>Badge: <span class="badge badge-primary">top <span class="rank-month"></span>% this month</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 card-margin hidden">
-                        <div class="card">
-                            <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-quarter"></span>%</div>
-                            <div class="card-body">
-                                <h4 class="card-title">Quarter</h4>
-                                <p class="card-text">You are in the top <span class="rank-exact-quarter"></span>% this quarter.</p>
-                                <p>Badge: <span class="badge badge-primary">top <span class="rank-quarter"></span>% this quarter</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 card-margin hidden">
-                        <div class="card">
-                            <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-year"></span>%</div>
-                            <div class="card-body">
-                                <h4 class="card-title">Year</h4>
-                                <p class="card-text">You are in the top <span class="rank-exact-year"></span>% this year.</p>
-                                <p>Badge: <span class="badge badge-primary">top <span class="rank-year"></span>% this year</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 card-margin hidden">
-                        <div class="card">
-                            <div class="card-img-top text-white bg-primary text-center align-text-middle league-img-replace"><span class="rank-alltime"></span>%</div>
-                            <div class="card-body">
-                                <h4 class="card-title">All time</h4>
-                                <p class="card-text">You are in the top <span class="rank-exact-alltime"></span>% of all time.</p>
-                                <p>Badge: <span class="badge badge-primary">top <span class="rank-alltime"></span>% overall</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="loader hidden" id="rank-stats"></div>
-            </div>
-        </div>
-    </div>
-</section>-->
-
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Made by and for the <a href="https://sobotics.org/">SOBotics</a> team. Content provided by the
-            <a href="https://api.stackexchange.com/">Stack Exchange API</a> under the <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 license</a>.</p>
+        <p class="m-0 text-center text-white">Made by and for the <a href="https://sobotics.org/">SOBotics</a> team. Content provided by the <a href="https://api.stackexchange.com/">Stack Exchange API</a> under the <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 license</a>.</p>
     </div>
     <!-- /.container -->
 </footer>
 
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script>
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -165,7 +98,7 @@
     $(document).ready(function () {
         fetch("/api/scoreboard", {
             method: "POST",
-            body: JSON.stringify({fkey: "<REDACTED>"}),
+            body: JSON.stringify({fkey: "{{ fkey }}"}),
             headers: { "Content-type": "application/json; charset=UTF-8" }
         }).then(function(resp) {
             return resp.json();

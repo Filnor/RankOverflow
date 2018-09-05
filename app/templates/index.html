@@ -15,7 +15,6 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link href="{{ url_for('static', filename='scrolling-nav.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='rankoverflow.css') }}" rel="stylesheet">
 
 </head>
@@ -29,11 +28,11 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!--<ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for("scoreboard") }}">SOBotics Flagger Scoreboard</a>
             </li>
-        </ul>-->
+        </ul>
     </div>
 </nav>
 
@@ -154,16 +153,15 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">&copy; 2017 - {{ current_year }} Filnor</p>
+        <p class="m-0 text-center text-white">&copy; 2017 - {{ current_year }} Filnor. Content provided by the <a href="https://api.stackexchange.com/">Stack Exchange API</a> under the <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0 license</a>.</p>
     </div>
     <!-- /.container -->
 </footer>
 
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script type='text/javascript' src='https://api.stackexchange.com/js/2.0/all.js'></script>
-<script src="{{ url_for('static', filename='rankoverflow.min.js') }}"></script>
+<script src="{{ url_for('static', filename='rankoverflow.js') }}"></script>
 </body>
 
 </html>

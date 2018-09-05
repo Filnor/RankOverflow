@@ -1,7 +1,15 @@
 from flask import Flask
-from app.api import bp as api_bp
+from config import Config
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.register_blueprint(api_bp, url_prefix='/api')
 
+app.config.from_object(Config)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+from app.models import Score
+from app.api import bp as api_bp
+app.register_blueprint(api_bp, url_prefix='/api')
 from app import routes

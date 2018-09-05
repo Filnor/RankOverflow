@@ -1,39 +1,24 @@
 from flask import jsonify, request
+
+from app import Score, db
 from app.api import bp
 import werkzeug.exceptions as ex
-import csv
+from config import Config
 
 @bp.route('/scoreboard', methods=['POST'])
 def scoreboard():
     data = request.get_json()
 
-    if data is None or data["fkey"] != "f0197a422ba110a461a850a54ca2475e0745fd9d":
+    if data is None or data["fkey"] != Config().fkey:
         return ex.Forbidden()
 
     scoreboard_map = []
 
-    with open("data.csv") as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=";")
-        for row in csv_reader:
-            scoreboard_map.append({"username": row[0] , "flag_count": row[1]})
+    scores = Score.query.order_by(Score.flag_count.desc()).all()
+    for score in scores:
+        scoreboard_map.append({"username": score.username, "flag_count": score.flag_count})
 
     response = jsonify(scoreboard_map)
-    response.status_code = 200
-    return response
-
-@bp.route('/scoreboard/clear', methods=['POST'])
-def clear_scoreboard():
-    data = request.get_json()
-
-    if data is None or data["fkey"] != "<REDACTED>":
-        return ex.Forbidden()
-
-    filename = "data.csv"
-    # opening the file with w+ mode truncates the file
-    f = open(filename, "w+")
-    f.close()
-
-    response = jsonify({"message": "Scoreboard data deleted."})
     response.status_code = 200
     return response
 
@@ -41,11 +26,16 @@ def clear_scoreboard():
 def add_scoreboard():
     data = request.get_json()
 
-    if data is None or data["fkey"] != "<REDACTED>":
+    if data is None or data["fkey"] != Config().fkey:
         return ex.Forbidden()
 
-    with open("data.csv", "a") as f:
-        f.write(f"{data['username']};{data['flag_count']}\n")
+    #Delete existing records for this user
+    db.engine.execute(f"DELETE FROM score WHERE username LIKE '%%{data['username']}%%'")
+
+    #Create new enty
+    score = Score(username=data['username'], flag_count=data['flag_count'])
+    db.session.add(score)
+    db.session.commit()
 
     response = jsonify({"message": "Scoreboard entry added."})
     response.status_code = 200
