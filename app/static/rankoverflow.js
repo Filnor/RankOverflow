@@ -82,6 +82,8 @@ function displayRanks(mode, userRank, maxPage, lastRank) {
     var percentageExact = share * 100;
     var percentage = percentageExact > 1 ? Math.ceil(percentageExact) : Math.ceil(percentageExact * 100) / 100;
 
+    if(isNaN(percentage))
+        return;
     $(`.rank-${mode}`).first().parent().parent().parent().removeClass("hidden");
     $(`.rank-${mode}`).html(percentage);
     $(`.rank-exact-${mode}`).html(percentageExact);
