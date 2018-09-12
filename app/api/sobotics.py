@@ -21,7 +21,7 @@ def scoreboard():
 
     scores = Score.query.order_by(Score.flag_count.desc()).all()
     for score in scores:
-        scoreboard_map.append({"username": _get_user_name(score.user_id), "flag_count": score.flag_count})
+        scoreboard_map.append({"user_id": score.user_id, "username": _get_user_name(score.user_id), "flag_count": score.flag_count})
 
     response = jsonify(scoreboard_map)
     response.status_code = 200
