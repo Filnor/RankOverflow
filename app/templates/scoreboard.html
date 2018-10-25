@@ -108,7 +108,7 @@
                 var row = `
             <tr class="${scoreCounter <= 10 || 'hidden'}">
                 <td>${scoreCounter}</td>
-                <td><a href="https://stackoverflow.com/u/${score.user_id}">${score.username}</a></td>
+                <td><a href="${score.profile_link}">${score.username}</a></td>
                 <td>${numberWithCommas(score.flag_count)}</td>
             </tr>
             `;

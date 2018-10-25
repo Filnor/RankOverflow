@@ -2,7 +2,6 @@ import gzip
 import io
 import json
 import urllib.error
-import logging
 from urllib.request import urlopen
 from flask import jsonify, request
 from app import Score, db
@@ -21,7 +20,8 @@ def scoreboard():
 
     scores = Score.query.order_by(Score.flag_count.desc()).all()
     for score in scores:
-        scoreboard_map.append({"user_id": score.user_id, "username": _get_user_name(score.user_id), "flag_count": score.flag_count})
+        user_name_and_profile_link = _get_user_name_and_profile_link(score.user_id)
+        scoreboard_map.append({"profile_link": user_name_and_profile_link[1], "username": user_name_and_profile_link[0], "flag_count": score.flag_count})
 
     response = jsonify(scoreboard_map)
     response.status_code = 200
@@ -61,7 +61,7 @@ def add_scoreboard():
     response.status_code = 200
     return response
 
-def _get_user_name(user_id):
+def _get_user_name_and_profile_link(user_id):
     """
     Get an user object for the specified user id from the API
     """
@@ -71,6 +71,6 @@ def _get_user_name(user_id):
         gzipped_file = gzip.GzipFile(fileobj=buffer)
         content = gzipped_file.read()
         users = json.loads(content.decode("utf-8"))
-        return users["items"][0]["display_name"]
+        return users["items"][0]["display_name"], users["items"][0]["link"]
     except urllib.error.HTTPError as e:
         return None
