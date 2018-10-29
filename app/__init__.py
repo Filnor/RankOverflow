@@ -1,15 +1,21 @@
+import firebase_admin
 from flask import Flask
 from config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from firebase_admin import credentials
+from firebase_admin import firestore
 
 app = Flask(__name__)
 
 app.config.from_object(Config)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
-from app.models import Score
+# Use the application default credentials
+cred = credentials.Certificate("./service_account_key.json")
+firebase_admin.initialize_app(cred, {
+    'projectId': Config().project_id,
+})
+
+db = firestore.client()
+
 from app.api import bp as api_bp
 app.register_blueprint(api_bp, url_prefix='/api')
 from app import routes

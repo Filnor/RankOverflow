@@ -123,3 +123,6 @@ migrations/script.py.mako
 /keyrings/live/secring.gpg/keyrings/live/pubring.gpg~
 /keyrings/live/pubring.kbx~
 /keyrings/live/secring.gpg
+
+# Firebase credentials
+service_account_key.json

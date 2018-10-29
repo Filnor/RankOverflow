@@ -55,13 +55,13 @@
                     </div>
                 </div>
 
-                <p>To get your user id, you need to authenticate yourself with Stack Exchange (if you have authenticated yourself here in the last 24 hours, you don't need to repeat that):</p>
+                <p>To get your user id, you need to authenticate yourself with Stack Exchange:</p>
                 <button class="btn btn-outline-primary" type="button" onclick="seAuth()"><img src="{{ url_for('static', filename='stackexchange.png') }}" alt="SE icon" height="16px" width="16px"> <span id="seAuthStatus">Authenticate with Stack Exchange</span></button>
-                <p class="small">With authenticating yourself you only give us read access to your public data. We won't be able to post in your name or see any private data.</p>
+                <p class="small">With authenticating yourself you only give us read access to your public data. We won't be able to post in your name or see any private data (Like your age or your email address).</p>
 
                 <p>Once you have authenticated yourself, select a site and click on this button to calculate your ranks:</p>
                 <label for="sites">Select a site:</label>
-                <select disabled id="sites">
+                <select class="form-control" id="sites" disabled>
                     <!--<option selected disabled>Choose...</option>-->
                 </select>
                 <button class="btn btn-primary disabled" type="button" id="calculate" onclick="calculateRank();">Calculate Ranks!</button>
@@ -75,7 +75,6 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2>Rank results</h2>
-                <p class="lead" id="rank-status">Please authenticate yourself and click "Calculate Rank" to see the results here.</p>
                 <div class="container" id="rank-summary">
                     <div class="col-xs-12 card-margin hidden">
                         <div class="card">
