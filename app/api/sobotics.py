@@ -30,7 +30,7 @@ def scoreboard():
         scoreboard_map.append({"profile_link": user_name_and_profile_link[1], "username": user_name_and_profile_link[0], "flag_count": score["flag_count"]})
 
     #Sort data
-    scoreboard_map = sorted(scoreboard_map, key=itemgetter("flag_count"))
+    scoreboard_map = sorted(scoreboard_map, key=itemgetter("flag_count"), reverse=True)
 
     response = jsonify(scoreboard_map)
     response.status_code = 200
