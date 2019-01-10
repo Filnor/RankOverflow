@@ -4,9 +4,10 @@ import json
 import urllib.error
 from operator import itemgetter
 from urllib.request import urlopen
+
+from firebase_admin import db
 from flask import jsonify, request
 from app.api import bp
-from app import db
 from config import Config
 import werkzeug.exceptions as ex
 
@@ -21,13 +22,14 @@ def scoreboard():
     scoreboard_map = []
 
     #Load data
-    docs = db.collection(u"scores").get()
-    for doc in docs:
-        score = doc.to_dict()
-        if int(score["flag_count"]) <= 499:
+    ref = db.reference('scores')
+    scores = ref.get()
+
+    for user_id, flag_count in scores.items():
+        if flag_count <= 499:
             continue
-        user_name_and_profile_link = _get_user_name_and_profile_link(score["user_id"])
-        scoreboard_map.append({"profile_link": user_name_and_profile_link[1], "username": user_name_and_profile_link[0], "flag_count": score["flag_count"]})
+        user_name_and_profile_link = _get_user_name_and_profile_link(user_id)
+        scoreboard_map.append({"profile_link": user_name_and_profile_link[1], "username": user_name_and_profile_link[0], "flag_count": flag_count})
 
     #Sort data
     scoreboard_map = sorted(scoreboard_map, key=itemgetter("flag_count"), reverse=True)
