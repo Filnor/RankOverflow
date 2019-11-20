@@ -56,25 +56,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!--<tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>131.213</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>1.084</td>
-                    </tr>-->
-                    <tr>
-                        <td id="loader" colspan="3" class="text-center">Loading scoreboard... <div class="loader"></div></td>
-                    </tr>
+                        {% for score in scores %}
+                        <tr class="{% if scores.index(score) + 1 > 10 %}hidden{% endif %}">
+                            <td>{{ scores.index(score) + 1 }}</td>
+                            <td><a href="{{ score['profile_link'] }}">{{ score['username'] }}</a></td>
+                            <td>{{ score['flag_count'] }}</td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
 
-                <button class="btn btn-primary" id="show-all" type="button" disabled>Show all</button>
-
-                <p class="small">Users with less than 500 flags are not shown</p>
+                <button class="btn btn-primary" id="show-all" type="button">Show all</button>
             </div>
         </div>
     </div>
@@ -94,34 +86,6 @@
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
-
-    $(document).ready(function () {
-        fetch("/api/scoreboard", {
-            method: "POST",
-            body: JSON.stringify({fkey: "{{ fkey }}"}),
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        }).then(function(resp) {
-            return resp.json();
-        }).then(function(scores) {
-            var scoreCounter = 1;
-            scores.forEach(function (score) {
-                var row = `
-            <tr class="${scoreCounter <= 10 || 'hidden'}">
-                <td>${scoreCounter}</td>
-                <td><a href="${score.profile_link}">${score.username}</a></td>
-                <td>${numberWithCommas(score.flag_count)}</td>
-            </tr>
-            `;
-                $("#scoreboard").find("tbody").append(row);
-                scoreCounter++;
-            });
-
-            $("#loader").remove();
-            $("#show-all").removeAttr("disabled");
-        }).catch(function(e) {
-            console.error(e);
-        })
-    });
 
     $("#show-all").on("click", function () {
         $("tr").removeClass("hidden");
