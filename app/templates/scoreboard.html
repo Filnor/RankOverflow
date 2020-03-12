@@ -60,7 +60,7 @@
                         <tr class="{% if scores.index(score) + 1 > 10 %}hidden{% endif %}">
                             <td>{{ scores.index(score) + 1 }}</td>
                             <td><a href="{{ score['profile_link'] }}">{{ score['username'] }}</a></td>
-                            <td>{{ score['flag_count'] }}</td>
+                            <td>{{ '{:,}'.format(score['flag_count']) }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

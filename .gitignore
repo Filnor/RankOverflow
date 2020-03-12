@@ -104,10 +104,14 @@ ENV/
 *.db
 
 # config file
-config.py
+config.py*
+service_account_key.json
 
 # SQLAlchemy
 migrations/alembic.ini
 migrations/env.py
 migrations/README
 migrations/script.py.mako
+
+*.wsgi
+
