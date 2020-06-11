@@ -38,7 +38,8 @@ def scoreboard():
     
     for obj in objects:
         name_profile_link = _get_user_name_and_profile_link(obj.id)
-        scores.append({"profile_link": name_profile_link[1], "username": name_profile_link[0], "flag_count": obj.flags})
+        if obj.flags >= 50:
+            scores.append({"profile_link": name_profile_link[1], "username": name_profile_link[0], "flag_count": obj.flags})
 
     #Sort data
     scores = sorted(scores, key=itemgetter("flag_count"), reverse=True)

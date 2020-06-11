@@ -35,7 +35,7 @@ def store_entry():
             db.session.commit() 
         response = jsonify(return_entry.as_dict())
         response.status_code = 200
-    except BaseException:
+    except:
         db.session.rollback()
         response.status_code = 503
     finally:
