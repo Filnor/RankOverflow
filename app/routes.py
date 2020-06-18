@@ -32,6 +32,21 @@ def index():
 
 @app.route('/scoreboard')
 def scoreboard():
+    objects = Score.query.order_by(Score.flags.desc()).limit(10)
+
+    scores = []
+    
+    for obj in objects:
+        name_profile_link = _get_user_name_and_profile_link(obj.id)
+        if obj.flags >= 50:
+            scores.append({"profile_link": name_profile_link[1], "username": name_profile_link[0], "flag_count": obj.flags})
+
+    #Sort data
+    scores = sorted(scores, key=itemgetter("flag_count"), reverse=True)
+    return render_template('scoreboard_top.html', scores=scores, all=False)
+
+@app.route('/scoreboard/all')
+def scoreboard_all():
     objects = Score.query.all()
 
     scores = []
@@ -43,7 +58,7 @@ def scoreboard():
 
     #Sort data
     scores = sorted(scores, key=itemgetter("flag_count"), reverse=True)
-    return render_template('scoreboard.html', scores=scores)
+    return render_template('scoreboard_all.html', scores=scores, all=True)
 
 @app.route('/blank')
 def blank():
